@@ -1,0 +1,1909 @@
+webpackJsonp([23],{
+
+/***/ 1124:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	
+	var _stringify = __webpack_require__(1126);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(170);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = function (ops) {
+	    var config = (0, _assign2.default)({
+	        url: "",
+	        data: "",
+	        callback: function callback() {}
+	    }, ops);
+	    if (config.url.match(/^\//)) {
+	        config.url = config.url.substr(1, config.url.length);
+	    }
+	    $.ajax({
+	        url: "/v1/" + config.url,
+	        type: "post",
+	        headers: { token: localStorage.getItem("token") },
+	        contentType: "application/json; charset=utf-8",
+	        data: (0, _stringify2.default)(config.data),
+	        success: function success(data) {
+	            if (data.status == 1001) {
+	                var currentPath = location.hash.split("#")[1].split("?")[0];
+	                _reactRouter.hashHistory.push({
+	                    pathname: "/common/login",
+	                    search: "?returnPath=" + currentPath
+	                });
+	            } else {
+	                config.callback.call(this, data);
+	            }
+	        }
+	    });
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1125)))
+
+/***/ }),
+
+/***/ 1126:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(1127), __esModule: true };
+
+/***/ }),
+
+/***/ 1127:
+/***/ (function(module, exports, __webpack_require__) {
+
+	var core = __webpack_require__(243);
+	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+
+/***/ }),
+
+/***/ 1173:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(ajax) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.DebtsForm = undefined;
+	
+	var _extends2 = __webpack_require__(332);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(170);
+	
+	var _antd = __webpack_require__(329);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var FormItem = _antd.Form.Item;
+	var Option = _antd.Select.Option;
+	var RadioGroup = _antd.Radio.Group;
+	var CheckboxGroup = _antd.Checkbox.Group;
+	var TextArea = _antd.Input.TextArea;
+	
+	var DebtsForm = exports.DebtsForm = function (_React$Component) {
+	    (0, _inherits3.default)(DebtsForm, _React$Component);
+	
+	    function DebtsForm(props) {
+	        (0, _classCallCheck3.default)(this, DebtsForm);
+	
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (DebtsForm.__proto__ || (0, _getPrototypeOf2.default)(DebtsForm)).call(this, props));
+	
+	        _this.state = {
+	            loading: false,
+	            "assetsType": {
+	                "debts": [],
+	                "stock": [],
+	                "purchase": [],
+	                "transfer": []
+	            },
+	            "industryList": [],
+	            "cascaderRegion": [],
+	            "project": {
+	                "key": "",
+	                "title": "",
+	                "category": "",
+	                "type": "",
+	                "detail": "",
+	                "accessory": {
+	                    "name": "",
+	                    "link": ""
+	                }
+	            },
+	            "financing": {
+	                "industry": "",
+	                "aptitude": "",
+	                "parentAptitue": "",
+	                "region": [],
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": "",
+	                "number": "",
+	                "deadline": "",
+	                "maxRate": "" },
+	            "mortgage": {
+	                "isNeed": "",
+	                "type": [],
+	                "name": "",
+	                "value": "",
+	                "rate": "" },
+	            "guarantee": {
+	                "isNeed": "",
+	                "method": "" },
+	            "stock": {
+	                "type": "",
+	                "property": "",
+	                "number": "",
+	                "rate": "",
+	                "value": "",
+	                "estimate": {
+	                    "times": "",
+	                    "type": ""
+	                }
+	            },
+	            "subject": {
+	                "name": "",
+	                "industry": "",
+	                "region": "",
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": ""
+	            },
+	            "assets": {
+	                "region": "",
+	                "number": "",
+	                "value": ""
+	            },
+	            "audit": {
+	                "status": "",
+	                "comment": ""
+	            }
+	        };
+	        ['handleSubmit', 'resetForm'].forEach(function (m) {
+	            return _this[m] = _this[m].bind(_this);
+	        });
+	        return _this;
+	    }
+	
+	    (0, _createClass3.default)(DebtsForm, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var that = this;
+	            this.setState({ loading: true });
+	            ajax({
+	                url: "/project/normal/getInfoDetail",
+	                method: "post",
+	                data: { id: that.props.infoID },
+	                callback: function callback(data) {
+	                    if (data.status == 200) {
+	                        var newData = data.data;
+	                        that.setState((0, _assign2.default)({ loading: false }, newData));
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            e.preventDefault();
+	            this.props.form.validateFields(function (err, values) {
+	                if (!err) {
+	                    ajax({
+	                        url: "/project/normal/audit",
+	                        method: "post",
+	                        data: values,
+	                        callback: function callback(data) {
+	                            if (data.status == 200) {
+	                                _antd.message.success("审核成功!", 1, function () {
+	                                    _reactRouter.hashHistory.push("/project/normal");
+	                                });
+	                            } else {
+	                                _antd.message.error(data.errMsg, 1);
+	                            }
+	                        }
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'return',
+	        value: function _return() {
+	            history.back();
+	        }
+	    }, {
+	        key: 'resetForm',
+	        value: function resetForm() {
+	            this.props.form.resetFields();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var getFieldDecorator = this.props.form.getFieldDecorator;
+	
+	            var formItemLayout = {
+	                labelCol: { span: 3 },
+	                wrapperCol: { span: 14 }
+	            };
+	            return _react2.default.createElement(
+	                _antd.Spin,
+	                { spinning: this.state.loading, tip: 'Loading...' },
+	                _react2.default.createElement(
+	                    _antd.Form,
+	                    null,
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u6807\u9898',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("project.title", {
+	                            rules: [{ require: true, message: "请输入标题!" }],
+	                            initialValue: this.state.project.title
+	                        })(_react2.default.createElement(_antd.Input, { disabled: this.props.actionType == "detail" ? true : false }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u522B'
+	                        }),
+	                        _react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true, defaultValue: '1' },
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '1' },
+	                                '\u503A\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '2' },
+	                                '\u80A1\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '4' },
+	                                '\u8D44\u91D1\u8F6C\u8BA9'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u578B'
+	                        }),
+	                        getFieldDecorator("project.type", {
+	                            initialValue: this.state.project.type
+	                        })(_react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true },
+	                            this.state.assetsType.debts.map(function (item) {
+	                                return _react2.default.createElement(
+	                                    Option,
+	                                    { value: item.key, key: item.key },
+	                                    item.value
+	                                );
+	                            })
+	                        ))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u65B9\u540D\u79F0'
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '\u8BE6\u89C1\u6211\u7684\u8054\u7CFB\u65B9\u5F0F'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u65B9\u6240\u5C5E\u884C\u4E1A'
+	                        }),
+	                        getFieldDecorator("industry", {
+	                            initialValue: this.state.financing.industry
+	                        })(_react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true },
+	                            this.state.industryList.map(function (item) {
+	                                return _react2.default.createElement(
+	                                    Option,
+	                                    { value: item.key, key: item.key },
+	                                    item.value
+	                                );
+	                            })
+	                        ))
+	                    ),
+	                    this.state.financing.industry == 1 ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u65B9\u5F00\u53D1\u8D44\u8D28'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, defaultValue: this.state.financing.aptitude })
+	                    ) : "",
+	                    this.state.financing.industry == 1 ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u6BCD\u516C\u53F8\u5F00\u53D1\u8D44\u8D28'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, defaultValue: this.state.financing.parentAptitue })
+	                    ) : "",
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u65B9\u6240\u5728\u5730'
+	                        }),
+	                        _react2.default.createElement(_antd.Cascader, { disabled: true,
+	                            options: this.state.cascaderRegion, value: this.state.financing.region
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u65B9\u53BB\u5E74\u51C0\u5229\u6DA6'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.financing.previousProfits }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u878D\u8D44\u91D1\u989D'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.financing.number }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u671F\u9650'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.financing.deadline }),
+	                        '\xA0\u5E74'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u6700\u9AD8\u63A5\u53D7\u5229\u7387'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.financing.maxRate }),
+	                        '\xA0%'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u6709\u65E0\u62B5/\u8D28\u62BC\u7269'
+	                        }),
+	                        _react2.default.createElement(
+	                            RadioGroup,
+	                            { disabled: true, value: this.state.mortgage.isNeed },
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u662F'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '0' },
+	                                '\u5426'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u62B5/\u8D28\u62BC\u7269\u7C7B\u578B'
+	                        }),
+	                        _react2.default.createElement(
+	                            CheckboxGroup,
+	                            { disabled: true, value: this.state.mortgage.type },
+	                            _react2.default.createElement(
+	                                _antd.Checkbox,
+	                                { value: '1' },
+	                                '\u56FA\u5B9A\u8D44\u4EA7'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Checkbox,
+	                                { value: '2' },
+	                                '\u6709\u4EF7\u8BC1\u5238'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Checkbox,
+	                                { value: '3' },
+	                                '\u5176\u4ED6'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u62B5/\u8D28\u62BC\u7269\u540D\u79F0'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, value: this.state.mortgage.name })
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u62B5/\u8D28\u62BC\u7269\u4EF7\u503C'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.mortgage.value }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u62B5/\u8D28\u62BC\u7269\u6298\u6263\u7387'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { style: { width: "95%" }, disabled: true, value: this.state.mortgage.rate }),
+	                        '\xA0%'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u6709\u65E0\u62C5\u4FDD'
+	                        }),
+	                        _react2.default.createElement(
+	                            RadioGroup,
+	                            { disabled: true, value: this.state.guarantee.isNeed },
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u662F'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '0' },
+	                                '\u5426'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u62C5\u4FDD\u65B9\u5F0F'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, value: this.state.guarantee.method })
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9879\u76EE\u8BE6\u60C5',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("project.detail", {
+	                            rules: [{ require: true, message: "请输入资金详情!" }],
+	                            initialValue: this.state.project.detail
+	                        })(_react2.default.createElement(TextArea, { disabled: this.props.actionType == "detail" ? true : false, autosize: { minRows: 3 } }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9644\u4EF6'
+	                        }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'ant-form-text' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: this.state.project.accessory.link },
+	                                this.state.project.accessory.name
+	                            )
+	                        )
+	                    ),
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u5BA1\u6838\u72B6\u6001',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("audit.status", {
+	                            rules: [{ required: true, message: "请选择审核状态!" }],
+	                            initialValue: this.state.audit.status
+	                        })(_react2.default.createElement(
+	                            RadioGroup,
+	                            null,
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '0' },
+	                                '\u4E0D\u901A\u8FC7'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u901A\u8FC7'
+	                            )
+	                        ))
+	                    ) : "",
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u5BA1\u6838\u610F\u89C1'
+	                        }),
+	                        getFieldDecorator("audit.comment", {
+	                            initialValue: this.state.audit.comment
+	                        })(_react2.default.createElement(TextArea, { autosize: { minRows: 3 } }))
+	                    ) : "",
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        { wrapperCol: { span: 8, offset: 3 } },
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'primary', onClick: this.handleSubmit, style: { "marginRight": "20px" } },
+	                            '\u63D0\u4EA4'
+	                        ) : "",
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'danger', onClick: this.resetForm, style: { "marginRight": "20px" } },
+	                            '\u91CD\u7F6E'
+	                        ) : "",
+	                        _react2.default.createElement(
+	                            _antd.Button,
+	                            { icon: 'rollback', onClick: this.return },
+	                            '\u8FD4\u56DE'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	    return DebtsForm;
+	}(_react2.default.Component);
+	
+	var WrappedDebtsForm = _antd.Form.create({})(DebtsForm);
+	
+	module.exports = WrappedDebtsForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1124)))
+
+/***/ }),
+
+/***/ 1174:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(ajax) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.StockForm = undefined;
+	
+	var _extends2 = __webpack_require__(332);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(170);
+	
+	var _antd = __webpack_require__(329);
+	
+	var _benefitsItem = __webpack_require__(1175);
+	
+	var _benefitsItem2 = _interopRequireDefault(_benefitsItem);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var FormItem = _antd.Form.Item;
+	var Option = _antd.Select.Option;
+	var RadioGroup = _antd.Radio.Group;
+	var TextArea = _antd.Input.TextArea;
+	
+	var StockForm = exports.StockForm = function (_React$Component) {
+	    (0, _inherits3.default)(StockForm, _React$Component);
+	
+	    function StockForm(props) {
+	        (0, _classCallCheck3.default)(this, StockForm);
+	
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (StockForm.__proto__ || (0, _getPrototypeOf2.default)(StockForm)).call(this, props));
+	
+	        _this.state = {
+	            loading: false,
+	            "assetsType": {
+	                "debts": [],
+	                "stock": [],
+	                "purchase": [],
+	                "transfer": []
+	            },
+	            "industryList": [],
+	            "cascaderRegion": [],
+	            "project": {
+	                "key": "",
+	                "title": "",
+	                "category": "",
+	                "type": "",
+	                "detail": "",
+	                "accessory": {
+	                    "name": "",
+	                    "link": ""
+	                }
+	            },
+	            "financing": {
+	                "industry": "",
+	                "aptitude": "",
+	                "parentAptitued": "",
+	                "region": [],
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": "",
+	                "number": "",
+	                "deadline": "",
+	                "maxRate": "" },
+	            "mortgage": {
+	                "isNeed": "",
+	                "type": [],
+	                "name": "",
+	                "value": "",
+	                "rate": "" },
+	            "guarantee": {
+	                "isNeed": "",
+	                "method": "" },
+	            "stock": {
+	                "type": "",
+	                "property": "",
+	                "number": "",
+	                "rate": "",
+	                "estimate": {
+	                    "times": "",
+	                    "type": ""
+	                }
+	            },
+	            "target": {
+	                "name": "",
+	                "industry": "",
+	                "region": "",
+	                "value": "",
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": ""
+	            },
+	            "assets": {
+	                "region": "",
+	                "number": "",
+	                "value": ""
+	            },
+	            "audit": {
+	                "status": "",
+	                "comment": ""
+	            }
+	        };
+	        ['handleSubmit', 'resetForm'].forEach(function (m) {
+	            return _this[m] = _this[m].bind(_this);
+	        });
+	        return _this;
+	    }
+	
+	    (0, _createClass3.default)(StockForm, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var that = this;
+	            this.setState({ loading: true });
+	            ajax({
+	                url: "/project/normal/getInfoDetail",
+	                method: "post",
+	                data: { id: that.props.infoID },
+	                callback: function callback(data) {
+	                    if (data.status == 200) {
+	                        var newData = data.data;
+	                        that.setState((0, _assign2.default)({ loading: false }, newData));
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            e.preventDefault();
+	            this.props.form.validateFields(function (err, values) {
+	                if (!err) {
+	                    ajax({
+	                        url: "/project/normal/audit",
+	                        method: "post",
+	                        data: values,
+	                        callback: function callback(data) {
+	                            if (data.status == 200) {
+	                                _antd.message.success("审核成功!", 1, function () {
+	                                    _reactRouter.hashHistory.push("/project/normal");
+	                                });
+	                            } else {
+	                                _antd.message.error(data.errMsg, 1);
+	                            }
+	                        }
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'return',
+	        value: function _return() {
+	            history.back();
+	        }
+	    }, {
+	        key: 'resetForm',
+	        value: function resetForm() {
+	            this.props.form.resetFields();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var getFieldDecorator = this.props.form.getFieldDecorator;
+	
+	            var formItemLayout = {
+	                labelCol: { span: 4 },
+	                wrapperCol: { span: 14 }
+	            };
+	            return _react2.default.createElement(
+	                _antd.Spin,
+	                { spinning: this.state.loading, tip: 'Loading...' },
+	                _react2.default.createElement(
+	                    _antd.Form,
+	                    null,
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u6807\u9898',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("project.title", {
+	                            rules: [{ require: true, message: "请输入标题!" }],
+	                            initialValue: this.state.project.title
+	                        })(_react2.default.createElement(_antd.Input, { disabled: this.props.actionType == "detail" ? true : false }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u522B'
+	                        }),
+	                        _react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true, defaultValue: '2' },
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '1' },
+	                                '\u503A\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '2' },
+	                                '\u80A1\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '4' },
+	                                '\u8D44\u91D1\u8F6C\u8BA9'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u53C2/\u63A7\u80A1'
+	                        }),
+	                        _react2.default.createElement(
+	                            RadioGroup,
+	                            { disabled: true, value: this.state.stock.type },
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u53C2\u80A1\u578B\u9879\u76EE'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '2' },
+	                                '\u63A7\u80A1\u578B\u9879\u76EE'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u578B'
+	                        }),
+	                        getFieldDecorator("project.type", {
+	                            initialValue: this.state.project.type
+	                        })(_react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true },
+	                            this.state.assetsType.stock.map(function (item) {
+	                                return _react2.default.createElement(
+	                                    Option,
+	                                    { value: item.key, key: item.key },
+	                                    item.value
+	                                );
+	                            })
+	                        ))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u80A1\u6743\u6027\u8D28'
+	                        }),
+	                        _react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true, value: this.state.stock.property },
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '1' },
+	                                '\u8001\u80A1\u8F6C\u8BA9'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '2' },
+	                                '\u65B0\u80A1\u589E\u53D1'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: this.state.stock.property == "1" ? "转让方名称" : "融资方名称"
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '\u8BE6\u89C1\u6211\u7684\u8054\u7CFB\u65B9\u5F0F'
+	                        )
+	                    ),
+	                    this.state.stock.property == "1" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u6807\u7684\u4F01\u4E1A\u540D\u79F0'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, value: this.state.target.name })
+	                    ) : "",
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: this.state.stock.property == "1" ? "标的企业所属行业" : "融资方所属行业"
+	                        }),
+	                        getFieldDecorator(this.state.stock.property == "1" ? "target.industry" : "financing.industry", {
+	                            initialValue: this.state.stock.property == "1" ? this.state.target.industry : this.state.financing.industry
+	                        })(_react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true },
+	                            this.state.industryList.map(function (item) {
+	                                return _react2.default.createElement(
+	                                    Option,
+	                                    { value: item.key, key: item.key },
+	                                    item.value
+	                                );
+	                            })
+	                        ))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: this.state.stock.property == "1" ? "标的企业所在地" : "融资方所在地"
+	                        }),
+	                        _react2.default.createElement(_antd.Cascader, { disabled: true,
+	                            options: this.state.cascaderRegion, value: this.state.stock.property == "1" ? this.state.target.region : this.state.financing.region
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: this.state.stock.property == "1" ? "标的企业去年利润" : "融资方去年利润"
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.property == "1" ? this.state.target.previousProfits : this.state.financing.previousProfits }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: this.state.stock.property == "1" ? "转让金额" : "融资金额"
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.number }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u51FA\u8BA9\u80A1\u6743\u6BD4\u4F8B'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.rate }),
+	                        '\xA0%'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u4F01\u4E1A\u6574\u4F53\u4F30\u503C'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.property == "1" ? this.state.target.number : this.state.financing.number }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u6295\u8D44\u4F30\u503C\u500D\u6570'
+	                        }),
+	                        getFieldDecorator("stock.estimate", {
+	                            initialValue: {
+	                                times: this.state.stock.estimate.times,
+	                                type: this.state.stock.estimate.type
+	                            }
+	                        })(_react2.default.createElement(_benefitsItem2.default, { actionType: this.props.actionType }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u4F01\u4E1A\u4ECA\u5E74\u9884\u8BA1\u51C0\u5229\u6DA6'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.property == "1" ? this.state.target.recentProfits : this.state.financing.recentProfits }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u4F01\u4E1A\u660E\u5E74\u9884\u8BA1\u51C0\u5229\u6DA6'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.stock.property == "1" ? this.state.target.nextProfits : this.state.financing.nextProfits }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9879\u76EE\u8BE6\u60C5',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("project.detail", {
+	                            rules: [{ require: true, message: "请输入资金详情!" }],
+	                            initialValue: this.state.project.detail
+	                        })(_react2.default.createElement(TextArea, { disabled: this.props.actionType == "detail" ? true : false, autosize: { minRows: 3 } }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9879\u76EE\u9644\u4EF6'
+	                        }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'ant-form-text' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: this.state.project.accessory.link },
+	                                this.state.project.accessory.name
+	                            )
+	                        )
+	                    ),
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u5BA1\u6838\u72B6\u6001',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("audit.status", {
+	                            rules: [{ required: true, message: "请选择审核状态!" }],
+	                            initialValue: this.state.audit.status
+	                        })(_react2.default.createElement(
+	                            RadioGroup,
+	                            null,
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '0' },
+	                                '\u4E0D\u901A\u8FC7'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u901A\u8FC7'
+	                            )
+	                        ))
+	                    ) : "",
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u5BA1\u6838\u610F\u89C1'
+	                        }),
+	                        getFieldDecorator("audit.comment", {
+	                            initialValue: this.state.audit.comment
+	                        })(_react2.default.createElement(TextArea, { autosize: { minRows: 3 } }))
+	                    ) : "",
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        { wrapperCol: { span: 8, offset: 3 } },
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'primary', onClick: this.handleSubmit, style: { "marginRight": "20px" } },
+	                            '\u63D0\u4EA4'
+	                        ) : "",
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'danger', onClick: this.resetForm, style: { "marginRight": "20px" } },
+	                            '\u91CD\u7F6E'
+	                        ) : "",
+	                        _react2.default.createElement(
+	                            _antd.Button,
+	                            { icon: 'rollback', onClick: this.return },
+	                            '\u8FD4\u56DE'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	    return StockForm;
+	}(_react2.default.Component);
+	
+	var WrappedStockForm = _antd.Form.create({})(StockForm);
+	
+	module.exports = WrappedStockForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1124)))
+
+/***/ }),
+
+/***/ 1175:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _antd = __webpack_require__(329);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Option = _antd.Select.Option;
+	
+	var BenefitsItem = function (_React$Component) {
+	    (0, _inherits3.default)(BenefitsItem, _React$Component);
+	
+	    function BenefitsItem(props) {
+	        (0, _classCallCheck3.default)(this, BenefitsItem);
+	
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (BenefitsItem.__proto__ || (0, _getPrototypeOf2.default)(BenefitsItem)).call(this, props));
+	
+	        var value = _this.props.value || {};
+	        _this.state = {
+	            times: value.times || 0,
+	            type: value.type || "1"
+	        };
+	        ['handleTimesChange', 'handleTypeChange', 'triggerChange'].forEach(function (m) {
+	            return _this[m] = _this[m].bind(_this);
+	        });
+	        return _this;
+	    }
+	
+	    (0, _createClass3.default)(BenefitsItem, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if ('value' in nextProps) {
+	                var value = nextProps.value;
+	                this.setState(value);
+	            }
+	        }
+	    }, {
+	        key: 'handleTimesChange',
+	        value: function handleTimesChange(e) {
+	            var times = parseInt(e.target.value || 0, 10);
+	            if (!('value' in this.props)) {
+	                this.setState({ times: times });
+	            }
+	            this.triggerChange({ times: times });
+	        }
+	    }, {
+	        key: 'handleTypeChange',
+	        value: function handleTypeChange(type) {
+	            if (!('value' in this.props)) {
+	                this.setState({ type: type });
+	            }
+	            this.triggerChange({ type: type });
+	        }
+	    }, {
+	        key: 'triggerChange',
+	        value: function triggerChange(changedValue) {
+	            var onChange = this.props.onChange;
+	            if (onChange) {
+	                onChange((0, _assign2.default)({}, this.state, changedValue));
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement(_antd.Input, {
+	                    disabled: true,
+	                    type: 'text',
+	                    value: this.state.times,
+	                    onChange: this.handleTimesChange,
+	                    style: { width: '25%' }
+	                }),
+	                '\xA0\u500D\xA0',
+	                _react2.default.createElement(_antd.Icon, { type: 'close' }),
+	                _react2.default.createElement(
+	                    _antd.Select,
+	                    { disabled: true,
+	                        value: this.state.type,
+	                        style: { width: '25%' },
+	                        onChange: this.handleTypeChange
+	                    },
+	                    _react2.default.createElement(
+	                        Option,
+	                        { value: '1' },
+	                        '\u53BB\u5E74\u51C0\u5229\u6DA6'
+	                    ),
+	                    _react2.default.createElement(
+	                        Option,
+	                        { value: '2' },
+	                        '\u4ECA\u5E74\u9884\u8BA1\u51C0\u5229\u6DA6'
+	                    ),
+	                    _react2.default.createElement(
+	                        Option,
+	                        { value: '3' },
+	                        '\u660E\u5E74\u9884\u8BA1\u51C0\u5229\u6DA6'
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	    return BenefitsItem;
+	}(_react2.default.Component);
+	
+	module.exports = BenefitsItem;
+
+/***/ }),
+
+/***/ 1176:
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(ajax) {'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.TransferForm = undefined;
+	
+	var _extends2 = __webpack_require__(332);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(170);
+	
+	var _antd = __webpack_require__(329);
+	
+	var _investItem = __webpack_require__(1177);
+	
+	var _investItem2 = _interopRequireDefault(_investItem);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var FormItem = _antd.Form.Item;
+	var Option = _antd.Select.Option;
+	var RadioGroup = _antd.Radio.Group;
+	var TextArea = _antd.Input.TextArea;
+	
+	var TransferForm = exports.TransferForm = function (_React$Component) {
+	    (0, _inherits3.default)(TransferForm, _React$Component);
+	
+	    function TransferForm(props) {
+	        (0, _classCallCheck3.default)(this, TransferForm);
+	
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (TransferForm.__proto__ || (0, _getPrototypeOf2.default)(TransferForm)).call(this, props));
+	
+	        _this.state = {
+	            loading: false,
+	            "assetsType": {
+	                "debts": [],
+	                "stock": [],
+	                "purchase": [],
+	                "transfer": []
+	            },
+	            "industryList": [],
+	            "cascaderRegion": [],
+	            "project": {
+	                "key": "",
+	                "title": "",
+	                "category": "",
+	                "type": "",
+	                "detail": "",
+	                "accessory": {
+	                    "name": "",
+	                    "link": ""
+	                }
+	            },
+	            "financing": {
+	                "industry": "",
+	                "aptitude": "",
+	                "parentAptitued": "",
+	                "region": [],
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": "",
+	                "number": "",
+	                "deadline": "",
+	                "maxRate": "" },
+	            "assets": {
+	                "region": ["0", "1", "2"],
+	                "value": 214,
+	                "number": 2145
+	            },
+	            "mortgage": {
+	                "isNeed": "",
+	                "type": [],
+	                "name": "",
+	                "value": "",
+	                "rate": "" },
+	            "guarantee": {
+	                "isNeed": "",
+	                "method": "" },
+	            "stock": {
+	                "type": "",
+	                "property": "",
+	                "number": "",
+	                "rate": "",
+	                "estimate": {
+	                    "times": "",
+	                    "type": ""
+	                }
+	            },
+	            "target": {
+	                "name": "",
+	                "industry": "",
+	                "region": "",
+	                "value": "",
+	                "previousProfits": "",
+	                "recentProfits": "",
+	                "nextProfits": ""
+	            },
+	            "audit": {
+	                "status": "",
+	                "comment": ""
+	            }
+	        };
+	        ['handleSubmit', 'resetForm'].forEach(function (m) {
+	            return _this[m] = _this[m].bind(_this);
+	        });
+	        return _this;
+	    }
+	
+	    (0, _createClass3.default)(TransferForm, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var that = this;
+	            this.setState({ loading: true });
+	            ajax({
+	                url: "/project/normal/getInfoDetail",
+	                method: "post",
+	                data: { id: that.props.infoID },
+	                callback: function callback(data) {
+	                    if (data.status == 200) {
+	                        var newData = data.data;
+	                        that.setState((0, _assign2.default)({ loading: false }, newData));
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            e.preventDefault();
+	            this.props.form.validateFields(function (err, values) {
+	                if (!err) {
+	                    ajax({
+	                        url: "/project/normal/audit",
+	                        method: "post",
+	                        data: values,
+	                        callback: function callback(data) {
+	                            if (data.status == 200) {
+	                                _antd.message.success("审核成功!", 1, function () {
+	                                    _reactRouter.hashHistory.push("/project/normal");
+	                                });
+	                            } else {
+	                                _antd.message.error(data.errMsg, 1);
+	                            }
+	                        }
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'return',
+	        value: function _return() {
+	            history.back();
+	        }
+	    }, {
+	        key: 'resetForm',
+	        value: function resetForm() {
+	            this.props.form.resetFields();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var getFieldDecorator = this.props.form.getFieldDecorator;
+	
+	            var formItemLayout = {
+	                labelCol: { span: 3 },
+	                wrapperCol: { span: 14 }
+	            };
+	            return _react2.default.createElement(
+	                _antd.Spin,
+	                { spinning: this.state.loading, tip: 'Loading...' },
+	                _react2.default.createElement(
+	                    _antd.Form,
+	                    null,
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u6807\u9898',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("project.title", {
+	                            rules: [{ require: true, message: "请输入标题!" }],
+	                            initialValue: this.state.project.title
+	                        })(_react2.default.createElement(_antd.Input, { disabled: this.props.actionType == "detail" ? true : false }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u522B'
+	                        }),
+	                        _react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true, defaultValue: '4' },
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '1' },
+	                                '\u503A\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '2' },
+	                                '\u80A1\u6743'
+	                            ),
+	                            _react2.default.createElement(
+	                                Option,
+	                                { value: '4' },
+	                                '\u8D44\u91D1\u8F6C\u8BA9'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u9879\u76EE\u7C7B\u578B'
+	                        }),
+	                        getFieldDecorator("project.type", {
+	                            initialValue: this.state.project.type
+	                        })(_react2.default.createElement(
+	                            _antd.Select,
+	                            { disabled: true },
+	                            this.state.assetsType.transfer.map(function (item) {
+	                                return _react2.default.createElement(
+	                                    Option,
+	                                    { value: item.key, key: item.key },
+	                                    item.value
+	                                );
+	                            })
+	                        ))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u8D44\u4EA7\u8F6C\u8BA9\u4EBA'
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '\u8BE6\u89C1\u6211\u7684\u8054\u7CFB\u65B9\u5F0F'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u8D44\u4EA7\u6240\u5728\u5730'
+	                        }),
+	                        _react2.default.createElement(_antd.Cascader, { disabled: true,
+	                            options: this.state.cascaderRegion, value: this.state.assets.region
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u8F6C\u8BA9\u91D1\u989D'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.assets.number }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u8D44\u4EA7\u4EF7\u503C'
+	                        }),
+	                        _react2.default.createElement(_antd.Input, { disabled: true, style: { width: "95%" }, value: this.state.assets.value }),
+	                        '\xA0\u4E07\u5143'
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9879\u76EE\u8BE6\u60C5',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("detail", {
+	                            rules: [{ require: true, message: "请输入资金详情!" }],
+	                            initialValue: this.state.project.detail
+	                        })(_react2.default.createElement(TextArea, { disabled: this.props.actionType == "detail" ? true : false, autosize: { minRows: 3 } }))
+	                    ),
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u9644\u4EF6'
+	                        }),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'ant-form-text' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: this.state.project.accessory.link },
+	                                this.state.project.accessory.name
+	                            )
+	                        )
+	                    ),
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({
+	                            required: true
+	                        }, formItemLayout, {
+	                            label: '\u5BA1\u6838\u72B6\u6001',
+	                            hasFeedback: this.props.actionType == "audit" ? true : false
+	                        }),
+	                        getFieldDecorator("audit.status", {
+	                            rules: [{ required: true, message: "请选择审核状态!" }],
+	                            initialValue: this.state.audit.status
+	                        })(_react2.default.createElement(
+	                            RadioGroup,
+	                            null,
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '0' },
+	                                '\u4E0D\u901A\u8FC7'
+	                            ),
+	                            _react2.default.createElement(
+	                                _antd.Radio,
+	                                { value: '1' },
+	                                '\u901A\u8FC7'
+	                            )
+	                        ))
+	                    ) : "",
+	                    this.props.actionType == "audit" ? _react2.default.createElement(
+	                        FormItem,
+	                        (0, _extends3.default)({}, formItemLayout, {
+	                            label: '\u5BA1\u6838\u610F\u89C1'
+	                        }),
+	                        getFieldDecorator("audit.comment", {
+	                            initialValue: this.state.audit.comment
+	                        })(_react2.default.createElement(TextArea, { autosize: { minRows: 3 } }))
+	                    ) : "",
+	                    _react2.default.createElement(
+	                        FormItem,
+	                        { wrapperCol: { span: 8, offset: 3 } },
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'primary', onClick: this.handleSubmit, style: { "marginRight": "20px" } },
+	                            '\u63D0\u4EA4'
+	                        ) : "",
+	                        this.props.actionType == "audit" ? _react2.default.createElement(
+	                            _antd.Button,
+	                            { type: 'danger', onClick: this.resetForm, style: { "marginRight": "20px" } },
+	                            '\u91CD\u7F6E'
+	                        ) : "",
+	                        _react2.default.createElement(
+	                            _antd.Button,
+	                            { icon: 'rollback', onClick: this.return },
+	                            '\u8FD4\u56DE'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	    return TransferForm;
+	}(_react2.default.Component);
+	
+	var WrappedTransferForm = _antd.Form.create({})(TransferForm);
+	
+	module.exports = WrappedTransferForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1124)))
+
+/***/ }),
+
+/***/ 1177:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _assign = __webpack_require__(238);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _antd = __webpack_require__(329);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var InvestItem = function (_React$Component) {
+	    (0, _inherits3.default)(InvestItem, _React$Component);
+	
+	    function InvestItem(props) {
+	        (0, _classCallCheck3.default)(this, InvestItem);
+	
+	        var _this = (0, _possibleConstructorReturn3.default)(this, (InvestItem.__proto__ || (0, _getPrototypeOf2.default)(InvestItem)).call(this, props));
+	
+	        var value = _this.props.value || {};
+	        _this.state = {
+	            min: value.min || 0,
+	            max: value.max || 0
+	        };
+	        ['handleMinChange', 'handleMaxChange', 'triggerChange'].forEach(function (m) {
+	            return _this[m] = _this[m].bind(_this);
+	        });
+	        return _this;
+	    }
+	
+	    (0, _createClass3.default)(InvestItem, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if ('value' in nextProps) {
+	                var value = nextProps.value;
+	                this.setState(value);
+	            }
+	        }
+	    }, {
+	        key: 'handleMinChange',
+	        value: function handleMinChange(e) {
+	            var min = e.target.value;
+	            if (!('value' in this.props)) {
+	                this.setState({ min: min });
+	            }
+	            this.triggerChange({ min: min });
+	        }
+	    }, {
+	        key: 'handleMaxChange',
+	        value: function handleMaxChange(e) {
+	            var max = parseInt(e.target.value || 0, 10);
+	            if (!('value' in this.props)) {
+	                this.setState({ max: max });
+	            }
+	            this.triggerChange({ max: max });
+	        }
+	    }, {
+	        key: 'triggerChange',
+	        value: function triggerChange(changedValue) {
+	            var onChange = this.props.onChange;
+	            if (onChange) {
+	                onChange((0, _assign2.default)({}, this.state, changedValue));
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement(_antd.Input, { type: 'text', value: this.state.min, onChange: this.handleMinChange, style: { width: '20%' }, disabled: true }),
+	                '\xA0\xA0\u2014\u2014\xA0\xA0',
+	                _react2.default.createElement(_antd.Input, { type: 'text', value: this.state.max, onChange: this.handleMaxChange, style: { width: '20%' }, disabled: true }),
+	                '\u4E07\u5143'
+	            );
+	        }
+	    }]);
+	    return InvestItem;
+	}(_react2.default.Component);
+	
+	module.exports = InvestItem;
+
+/***/ }),
+
+/***/ 1178:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Audit = undefined;
+	
+	var _getPrototypeOf = __webpack_require__(277);
+	
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+	
+	var _classCallCheck2 = __webpack_require__(282);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(283);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(287);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(321);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(170);
+	
+	var _antd = __webpack_require__(329);
+	
+	var _debtsForm = __webpack_require__(1173);
+	
+	var _debtsForm2 = _interopRequireDefault(_debtsForm);
+	
+	var _stockForm = __webpack_require__(1174);
+	
+	var _stockForm2 = _interopRequireDefault(_stockForm);
+	
+	var _transferForm = __webpack_require__(1176);
+	
+	var _transferForm2 = _interopRequireDefault(_transferForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Content = _antd.Layout.Content;
+	
+	var Audit = exports.Audit = function (_React$Component) {
+	    (0, _inherits3.default)(Audit, _React$Component);
+	
+	    function Audit(props) {
+	        (0, _classCallCheck3.default)(this, Audit);
+	        return (0, _possibleConstructorReturn3.default)(this, (Audit.__proto__ || (0, _getPrototypeOf2.default)(Audit)).call(this, props));
+	    }
+	
+	    (0, _createClass3.default)(Audit, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _antd.Layout,
+	                { style: { padding: '0 24px 24px' } },
+	                _react2.default.createElement(
+	                    _antd.Breadcrumb,
+	                    { style: { margin: '12px 0' } },
+	                    this.props.routes.map(function (item, index) {
+	                        return _react2.default.createElement(
+	                            _antd.Breadcrumb.Item,
+	                            { key: '' },
+	                            item.breadcrumbName
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    Content,
+	                    { style: { background: '#fff', padding: 24, margin: 0, minHeight: 280 } },
+	                    this.props.location.query.assetsType == 1 ? _react2.default.createElement(_debtsForm2.default, { infoID: this.props.params.id, actionType: 'audit' }) : this.props.location.query.assetsType == 2 ? _react2.default.createElement(_stockForm2.default, { infoID: this.props.params.id, actionType: 'audit' }) : _react2.default.createElement(_transferForm2.default, { infoID: this.props.params.id, actionType: 'audit' })
+	                )
+	            );
+	        }
+	    }]);
+	    return Audit;
+	}(_react2.default.Component);
+	
+	module.exports = Audit;
+
+/***/ })
+
+});
+//# sourceMappingURL=23.chunk.js.map
