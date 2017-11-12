@@ -130,6 +130,7 @@ function checkUpdate(newData) {
                             shell.execSync(`cp ${tempPath}electron/IPList/serverConfig.json ./`);
                         } catch(e) {showUpdateFail("更新文件失败")}
                         activeIP = loadActiveIP();
+                        console.log(activeIP)
                         checkGUIUpdate(newData);
                     } else {
                         showUpdateFail("更新临时文件失败");
